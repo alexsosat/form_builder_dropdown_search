@@ -132,6 +132,7 @@ class FormBuilderDropdownSearchState<T>
         builder: (state) => DropdownSearch<T>(
           key: bottomSheetKey,
           items: widget.items,
+          validator: widget.validator,
           suffixProps: DropdownSuffixProps(
             clearButtonProps:
                 widget.clearButtonProps ?? const ClearButtonProps(),

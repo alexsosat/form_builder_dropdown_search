@@ -49,6 +49,7 @@ class __ExampleFormState extends State<_ExampleForm> {
 
                 _nestedFormKey.currentState?.openDropDownSearch();
               },
+              validator: (p0) => p0 == null ? 'Required' : null,
             ),
             const SizedBox(
               height: 40,
@@ -61,6 +62,7 @@ class __ExampleFormState extends State<_ExampleForm> {
               onChanged: (value) {
                 print('Selected value: $value');
               },
+              validator: (p0) => p0 == null ? 'Required' : null,
             ),
             ElevatedButton(
               onPressed: () {
