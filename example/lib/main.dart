@@ -49,7 +49,6 @@ class __ExampleFormState extends State<_ExampleForm> {
 
                 _nestedFormKey.currentState?.openDropDownSearch();
               },
-              validator: (p0) => p0 == null ? 'Required' : null,
             ),
             const SizedBox(
               height: 40,
@@ -62,21 +61,26 @@ class __ExampleFormState extends State<_ExampleForm> {
               onChanged: (value) {
                 print('Selected value: $value');
               },
-              validator: (p0) => p0 == null ? 'Required' : null,
             ),
             ElevatedButton(
               onPressed: () {
+                _formKey.currentState?.fields["nested_dropdown_search"]
+                    ?.invalidate(
+                  'This field is required',
+                  shouldAutoScrollWhenFocus: true,
+                );
+
                 // Validate the form and save the values
-                final isValid =
-                    _formKey.currentState?.saveAndValidate() ?? false;
+                // final isValid =
+                //     _formKey.currentState?.saveAndValidate() ?? false;
 
-                print(isValid);
+                // print(isValid);
 
-                if (_formKey.currentState?.saveAndValidate() ?? false) {
-                  print('Form submitted successfully');
-                } else {
-                  print('Form submission failed');
-                }
+                // if (_formKey.currentState?.saveAndValidate() ?? false) {
+                //   print('Form submitted successfully');
+                // } else {
+                //   print('Form submission failed');
+                // }
               },
               child: const Text('Submit'),
             ),

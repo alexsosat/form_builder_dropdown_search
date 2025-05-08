@@ -143,14 +143,15 @@ class FormBuilderDropdownSearchState<T>
           enabled: widget.enabled,
           dropdownBuilder: widget.dropdownBuilder,
           decoratorProps: DropDownDecoratorProps(
-            decoration: widget.decoration ??
+            decoration: widget.decoration?.copyWith(
+                  errorText: state.hasError ? state.errorText : null,
+                ) ??
                 InputDecoration()
                     .applyDefaults(
                       Theme.of(context).inputDecorationTheme,
                     )
                     .copyWith(
                       errorText: state.hasError ? state.errorText : null,
-                      enabled: widget.enabled,
                     ),
             textAlign: widget.dropdownSearchTextAlign,
             textAlignVertical: widget.dropdownSearchTextAlignVertical,
