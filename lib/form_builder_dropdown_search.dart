@@ -114,65 +114,72 @@ class FormBuilderDropdownSearch<T> extends StatefulWidget {
 class FormBuilderDropdownSearchState<T>
     extends State<FormBuilderDropdownSearch<T>> {
   /// Key for the DropdownSearch widget
-  final GlobalKey<DropdownSearchState<T>> bottomSheetKey =
+  final GlobalKey<DropdownSearchState<T>> _bottomSheetKey =
       GlobalKey<DropdownSearchState<T>>();
+
+  late FormFieldState<T?> _formFieldState;
 
   @override
   Widget build(BuildContext context) => FormBuilderField<T>(
-        name: widget.name,
-        autovalidateMode: widget.autoValidateMode,
-        onChanged: widget.onChanged,
-        onSaved: widget.onSaved,
-        onReset: widget.onReset,
-        focusNode: widget.focusNode,
-        enabled: widget.enabled,
+    name: widget.name,
+    autovalidateMode: widget.autoValidateMode,
+    onChanged: widget.onChanged,
+    onSaved: widget.onSaved,
+    onReset: widget.onReset,
+    focusNode: widget.focusNode,
+    enabled: widget.enabled,
+    validator: widget.validator,
+    valueTransformer: widget.valueTransformer,
+    initialValue: widget.initialValue,
+    builder: (state) {
+      _formFieldState = state;
+      return DropdownSearch<T>(
+        key: _bottomSheetKey,
+        items: widget.items,
         validator: widget.validator,
-        valueTransformer: widget.valueTransformer,
-        initialValue: widget.initialValue,
-        builder: (state) => DropdownSearch<T>(
-          key: bottomSheetKey,
-          items: widget.items,
-          validator: widget.validator,
-          suffixProps: DropdownSuffixProps(
-            clearButtonProps:
-                widget.clearButtonProps ?? const ClearButtonProps(),
-            dropdownButtonProps:
-                widget.dropdownButtonProps ?? const DropdownButtonProps(),
-          ),
-          compareFn: widget.compareFn,
-          enabled: widget.enabled,
-          dropdownBuilder: widget.dropdownBuilder,
-          decoratorProps: DropDownDecoratorProps(
-            decoration: widget.decoration?.copyWith(
-                  errorText: state.hasError ? state.errorText : null,
-                ) ??
-                InputDecoration()
-                    .applyDefaults(
-                      Theme.of(context).inputDecorationTheme,
-                    )
-                    .copyWith(
-                      errorText: state.hasError ? state.errorText : null,
-                    ),
-            textAlign: widget.dropdownSearchTextAlign,
-            textAlignVertical: widget.dropdownSearchTextAlignVertical,
-            baseStyle: widget.dropdownSearchTextStyle,
-          ),
-          filterFn: widget.filterFn,
-          itemAsString: widget.itemAsString,
-          onBeforeChange: widget.onBeforeChange,
-          onChanged: state.didChange,
-          popupProps: widget.popupProps,
-          selectedItem: state.value,
+        suffixProps: DropdownSuffixProps(
+          clearButtonProps: widget.clearButtonProps ?? const ClearButtonProps(),
+          dropdownButtonProps:
+              widget.dropdownButtonProps ?? const DropdownButtonProps(),
         ),
+        compareFn: widget.compareFn,
+        enabled: widget.enabled,
+        dropdownBuilder: widget.dropdownBuilder,
+        decoratorProps: DropDownDecoratorProps(
+          decoration:
+              widget.decoration?.copyWith(
+                errorText: state.hasError ? state.errorText : null,
+              ) ??
+              InputDecoration()
+                  .applyDefaults(Theme.of(context).inputDecorationTheme)
+                  .copyWith(errorText: state.hasError ? state.errorText : null),
+          textAlign: widget.dropdownSearchTextAlign,
+          textAlignVertical: widget.dropdownSearchTextAlignVertical,
+          baseStyle: widget.dropdownSearchTextStyle,
+        ),
+        filterFn: widget.filterFn,
+        itemAsString: widget.itemAsString,
+        onBeforeChange: widget.onBeforeChange,
+        onChanged: state.didChange,
+        popupProps: widget.popupProps,
+        selectedItem: state.value,
       );
+    },
+  );
 
   void openDropDownSearch() {
-    bottomSheetKey.currentState?.openDropDownSearch();
+    _bottomSheetKey.currentState?.openDropDownSearch();
   }
 
   void closeDropDownSearch() {
-    bottomSheetKey.currentState?.closeDropDownSearch();
+    _bottomSheetKey.currentState?.closeDropDownSearch();
   }
 
-  GlobalKey<DropdownSearchState<T>> get dropdownSearchState => bottomSheetKey;
+  GlobalKey<DropdownSearchState<T>> get dropdownSearchState => _bottomSheetKey;
+
+  FormFieldState<T?> get formFieldState => _formFieldState;
+
+  void updateValue(T? value) {
+    _formFieldState.didChange(value);
+  }
 }
