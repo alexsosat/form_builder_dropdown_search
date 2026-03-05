@@ -160,7 +160,8 @@ class FormBuilderDropdownSearchState<T>
         filterFn: widget.filterFn,
         itemAsString: widget.itemAsString,
         onBeforeChange: widget.onBeforeChange,
-        onChanged: state.didChange,
+        onSelected: state.didChange,
+        onClear: () => state.didChange(null),
         popupProps: widget.popupProps,
         selectedItem: state.value,
       );

@@ -11,6 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ),
       title: 'Material App',
       home: Scaffold(
         appBar: AppBar(
@@ -43,7 +51,29 @@ class __ExampleFormState extends State<_ExampleForm> {
             FormBuilderDropdownSearch<String>(
               name: 'dropdown_search',
               items: (_, __) => ['Item 1', 'Item 2', 'Item 3'],
-              decoration: const InputDecoration(labelText: 'Dropdown Search'),
+              decoration: const InputDecoration(
+                labelText: 'Dropdown Search',
+              ),
+              popupProps: PopupProps.modalBottomSheet(
+                modalBottomSheetProps: ModalBottomSheetProps(
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                ),
+                itemClickProps: ClickProps(
+                  ignoreChildPointerEvents: false,
+                ),
+                itemBuilder: (context, item, isSelected, isDisabled) =>
+                    ListTile(
+                  title: Text(item),
+                  subtitle: Text(item),
+                  leading: Icon(Icons.check),
+                  trailing: IconButton(
+                    onPressed: () {
+                      print('Deleted item: $item');
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
+                ),
+              ),
               onChanged: (value) {
                 print('Selected value: $value');
 
