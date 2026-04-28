@@ -1,6 +1,6 @@
 name: form_builder_dropdown_search
 description: "A new Flutter package project."
-version: 0.0.7
+version: 0.0.8
 homepage: null
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   dropdown_search:
     git:
       url: https://github.com/alexsosat/dropdown_search.git
-      ref: 6.0.2
+      ref: 6.0.3
   flutter:
     sdk: flutter
   flutter_form_builder: ">=10.0.0 <11.0.0"
@@ -25,6 +25,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter: null
+
 # To add assets to your package, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg

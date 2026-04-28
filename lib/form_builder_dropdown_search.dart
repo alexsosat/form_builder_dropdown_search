@@ -175,6 +175,14 @@ class FormBuilderDropdownSearchState<T>
     _bottomSheetKey.currentState?.closeDropDownSearch();
   }
 
+  void addSuggestedItem(T item) {
+    _bottomSheetKey.currentState?.popupAddSuggestedItem(item);
+  }
+
+  void removeSuggestedItem(T item) {
+    _bottomSheetKey.currentState?.popupRemoveSuggestedItem(item);
+  }
+
   GlobalKey<DropdownSearchState<T>> get dropdownSearchState => _bottomSheetKey;
 
   FormFieldState<T?> get formFieldState => _formFieldState;
