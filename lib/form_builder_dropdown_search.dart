@@ -31,6 +31,9 @@ class FormBuilderDropdownSearch<T> extends StatefulWidget {
     this.clearButtonProps,
     this.dropdownSearchTextStyle,
     this.dropdownButtonProps,
+    this.clickProps = const ClickProps(),
+    this.mode = Mode.form,
+    this.onBeforePopupOpening,
     super.key,
   });
 
@@ -106,6 +109,15 @@ class FormBuilderDropdownSearch<T> extends StatefulWidget {
   ///custom dropdown icon button properties
   final DropdownButtonProps? dropdownButtonProps;
 
+  ///custom dropdown click properties
+  final ClickProps clickProps;
+
+  ///dropdown mode
+  final Mode mode;
+
+  ///callback executed before opening the dropdown
+  final BeforePopupOpening<T>? onBeforePopupOpening;
+
   @override
   State<FormBuilderDropdownSearch<T>> createState() =>
       FormBuilderDropdownSearchState<T>();
@@ -163,6 +175,9 @@ class FormBuilderDropdownSearchState<T>
         onChanged: state.didChange,
         popupProps: widget.popupProps,
         selectedItem: state.value,
+        clickProps: widget.clickProps,
+        mode: widget.mode,
+        onBeforePopupOpening: widget.onBeforePopupOpening,
       );
     },
   );

@@ -59,10 +59,11 @@ class __ExampleFormState extends State<_ExampleForm> {
                   backgroundColor: Theme.of(context).colorScheme.surface,
                 ),
                 itemClickProps: ClickProps(
-                  ignoreChildPointerEvents: false,
+                  ignorePointers: false,
                 ),
-                itemBuilder: (context, item, isSelected, isDisabled) =>
-                    ListTile(
+                itemBuilder:
+                    (context, item, isSelected, isDisabled, isSuggested) =>
+                        ListTile(
                   title: Text(item),
                   subtitle: Text(item),
                   leading: Icon(Icons.check),

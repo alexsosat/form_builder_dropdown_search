@@ -53,11 +53,11 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "7.0.0-pre5"
-      resolved-ref: "66bfd70de22f6f23499ff39d276b0b9ebc2312dc"
+      ref: "6.0.7"
+      resolved-ref: c8ac9db436168d7ee187d8d89ed4cad11329069a
       url: "https://github.com/alexsosat/dropdown_search.git"
     source: git
-    version: "7.0.0-pre5"
+    version: "6.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -98,7 +98,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.5"
+    version: "0.0.8"
   intl:
     dependency: transitive
     description:
