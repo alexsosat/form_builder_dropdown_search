@@ -182,26 +182,39 @@ class FormBuilderDropdownSearchState<T>
     },
   );
 
+  /// Opens the dropdwown search if the field has no value
+  void maybeOpenDropDownSearch() {
+    final value = _formFieldState.value;
+    if (value == null) return;
+
+    openDropDownSearch();
+  }
+
+  /// Opens the dropdown search
   void openDropDownSearch() {
     _bottomSheetKey.currentState?.openDropDownSearch();
   }
 
+  /// Closes the dropdown search
   void closeDropDownSearch() {
     _bottomSheetKey.currentState?.closeDropDownSearch();
   }
 
-  void addSuggestedItem(T item) {
-    _bottomSheetKey.currentState?.popupAddSuggestedItem(item);
+  /// Adds a pinned item to the dropdown search
+  void addPinnedItem(T item) {
+    _bottomSheetKey.currentState?.popupAddPinnedItem(item);
   }
 
-  void removeSuggestedItem(T item) {
-    _bottomSheetKey.currentState?.popupRemoveSuggestedItem(item);
+  /// Removes a pinned item from the dropdown search
+  void removePinnedItem(T item) {
+    _bottomSheetKey.currentState?.popupRemovePinnedItem(item);
   }
 
   GlobalKey<DropdownSearchState<T>> get dropdownSearchState => _bottomSheetKey;
 
   FormFieldState<T?> get formFieldState => _formFieldState;
 
+  /// Updates the value of the form field
   void updateValue(T? value) {
     _formFieldState.didChange(value);
   }
