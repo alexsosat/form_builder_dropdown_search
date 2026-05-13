@@ -50,7 +50,10 @@ class __ExampleFormState extends State<_ExampleForm> {
           children: [
             FormBuilderDropdownSearch<String>(
               name: 'dropdown_search',
-              items: (_, __) => ['Item 1', 'Item 2', 'Item 3'],
+              items: (_, __) async {
+                await Future.delayed(const Duration(seconds: 5));
+                return ['Item 1'];
+              },
               decoration: const InputDecoration(
                 labelText: 'Dropdown Search',
               ),
@@ -59,7 +62,7 @@ class __ExampleFormState extends State<_ExampleForm> {
                   backgroundColor: Theme.of(context).colorScheme.surface,
                 ),
                 itemClickProps: ClickProps(
-                  ignorePointers: false,
+                  autoSelectIfOnlyOne: true,
                 ),
                 itemBuilder:
                     (context, item, isSelected, isDisabled, isSuggested) =>
