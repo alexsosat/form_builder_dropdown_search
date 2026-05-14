@@ -213,4 +213,15 @@ class FormBuilderDropdownSearchState<T>
   void updateValue(T? value) {
     _formFieldState.didChange(value);
   }
+
+  /// Retrieves the items from the dropdown search
+  Future<List<T>?>? retrieveItems({
+    bool autoSelectIfOneItem = false,
+    bool filterDisabledItems = false,
+    String filter = '',
+  }) => _bottomSheetKey.currentState?.retrieveItems(
+    autoSelectIfOneItem: autoSelectIfOneItem,
+    filterDisabledItems: filterDisabledItems,
+    filter: filter,
+  );
 }
