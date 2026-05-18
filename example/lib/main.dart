@@ -51,8 +51,7 @@ class __ExampleFormState extends State<_ExampleForm> {
             FormBuilderDropdownSearch<String>(
               name: 'dropdown_search',
               items: (_, __) async {
-                await Future.delayed(const Duration(seconds: 5));
-                return ['Item 1'];
+                return ['Item 1', "item 2"];
               },
               decoration: const InputDecoration(
                 labelText: 'Dropdown Search',
@@ -78,10 +77,12 @@ class __ExampleFormState extends State<_ExampleForm> {
                   ),
                 ),
               ),
-              onChanged: (value) {
-                print('Selected value: $value');
+              onChanged: (value) async {
+                final items =
+                    await _nestedFormKey.currentState?.retrieveItems();
 
-                _nestedFormKey.currentState?.openDropDownSearch();
+                _formKey.currentState?.fields["nested_dropdown_search"]
+                    ?.didChange(items!.first);
               },
             ),
             const SizedBox(
@@ -93,6 +94,9 @@ class __ExampleFormState extends State<_ExampleForm> {
               items: (_, __) => ['Item 4', 'Item 5', 'Item 6'],
               decoration: const InputDecoration(labelText: 'Dropdown Search 2'),
               onChanged: (value) {
+                print('Changed value: $value');
+              },
+              onItemSelected: (value) {
                 print('Selected value: $value');
               },
             ),

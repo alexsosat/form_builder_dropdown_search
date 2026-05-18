@@ -28,6 +28,7 @@ class FormBuilderDropdownSearch<T> extends StatefulWidget {
       showSearchBox: true,
       fit: FlexFit.loose,
     ),
+    this.onItemSelected,
     this.clearButtonProps,
     this.dropdownSearchTextStyle,
     this.dropdownButtonProps,
@@ -44,6 +45,9 @@ class FormBuilderDropdownSearch<T> extends StatefulWidget {
 
   /// Function to be called when the value is changed
   final ValueChanged<T?>? onChanged;
+
+  /// Function to be called when a value is selected from the dropdown
+  final ValueChanged<T?>? onItemSelected;
 
   /// Function to be called when the value is saved
   final ValueChanged<T?>? onSaved;
@@ -168,7 +172,10 @@ class FormBuilderDropdownSearchState<T>
         filterFn: widget.filterFn,
         itemAsString: widget.itemAsString,
         onBeforeChange: widget.onBeforeChange,
-        onChanged: state.didChange,
+        onChanged: (value) {
+          state.didChange(value);
+          widget.onItemSelected?.call(value);
+        },
         popupProps: widget.popupProps,
         selectedItem: state.value,
         mode: widget.mode,
