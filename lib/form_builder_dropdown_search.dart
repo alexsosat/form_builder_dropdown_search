@@ -180,7 +180,7 @@ class FormBuilderDropdownSearchState<T>
   /// Opens the dropdwown search if the field has no value
   void maybeOpenDropDownSearch() {
     final value = _formFieldState.value;
-    if (value == null) return;
+    if (value != null) return;
 
     openDropDownSearch();
   }
